@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script type="text/javascript" src="jquery-3.1.0.min.js"></script>
-    <script type="text/javascript" src="popup.js"></script>
-    <link rel="stylesheet" type="text/css" href="popup.css"/>
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css"/>
+    <script type="text/javascript" src="js/db_init.js"></script>
+    <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="js/popup.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/popup.css"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
     <title></title>
 </head>
 <body>
@@ -21,7 +22,7 @@
     <p id="successP">Your success changed message</p>
     <div id="formForChangePassword">
         <form>
-            <div class="row">
+            <div class="row" id="oldPasswordDiv">
                 <div class="col-xs-6">
                     <label for="oldPassword" class="labelStyle">Your old password</label>
                 </div>
