@@ -1,0 +1,37 @@
+#container{
+    width: 425px;
+    height: 225px;
+    background-color: green;
+    border: 2px solid red;
+    padding: 5px;
+}
+
+.labelStyle{
+    color: white;
+    font-weight: bold;
+}
+
+div.row{
+    margin-top: 5px;
+}
+
+ul#languageMenu{
+    list-style: none;
+    display: inline;
+}
+
+ul#languageMenu li{
+    display: inline;
+}
+
+ul#languageMenu li a, ul#languageMenu li a:active, ul#languageMenu li a:hover{
+    color: white;
+}
+
+#successP{
+    color: green;
+    text-shadow: 2px 2px white;
+    font-weight: bold;
+    font-size:19px;
+    text-align: center;
+}
