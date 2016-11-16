@@ -22,6 +22,7 @@ if (typeof(Storage) === "undefined") {
 
 //jQuery
 $(document).ready(function () {
+
     //local storage
     /*localStorage.setItem("currentLanguage", "RU");
 
@@ -38,10 +39,10 @@ $(document).ready(function () {
     var newPassword = $("#newPassword");
     var confirmNewPassword = $("#confirmNewPassword");
 
-    var langRU = $("#langRU");
-    var langEN = $("#langEN");
+    /*var langRU = $("#langRU");
+    var langEN = $("#langEN");*/
 
-    var oldPasswordDiv = $("#oldPasswordDiv");
+    /*var oldPasswordDiv = $("#oldPasswordDiv");
 
     var oldPasswordShow = false;
     if(dbEmpty){
@@ -54,9 +55,9 @@ $(document).ready(function () {
     //default for elaments
     successP.css("display", "none");
     successP.fadeOut();
-    defineLanguage();
+    defineLanguage();*/
 
-    langRU.click(function () {
+    /*langRU.click(function () {
         localStorage.setItem("currentLanguage", "RU");
     });
 
@@ -73,19 +74,19 @@ $(document).ready(function () {
                 langEN.css("border", "2px solid blue");
             }
         }
-    }
+    }*/
 
-    addOrModifyPassword.prop('disabled', true);
+    // addOrModifyPassword.prop('disabled', true);
 
-    function changeTextFields() {
+    /*function changeTextFields() {
         if((!dbEmpty && !oldPassword.val()) || !newPassword.val() || !confirmNewPassword.val()){
             addOrModifyPassword.prop('disabled', true);
         }else{
             addOrModifyPassword.prop('disabled', false);
         }
-    }
+    }*/
 
-    function emptyFields() {
+    /*function emptyFields() {
         oldPassword.val("");
         newPassword.val("");
         confirmNewPassword.val("");
@@ -100,34 +101,50 @@ $(document).ready(function () {
         }else{
             currentTextField.css("border", "1px solid green");
         }
-    }
+    }*/
 
-    resetBtn.click(function () {
+    /*resetBtn.click(function () {
         addOrModifyPassword.prop('disabled', true);
         emptyFields();
         oldPassword.css("border", "5px solid red");
         newPassword.css("border", "5px solid red");
         confirmNewPassword.css("border", "5px solid red");
-    });
+    });*/
 
-    oldPassword.keypress(changeTextFields);
+    /*oldPassword.keypress(changeTextFields);
     newPassword.keypress(changeTextFields);
     confirmNewPassword.keypress(changeTextFields);
 
     oldPassword.keydown(changeTextFields);
     newPassword.keydown(changeTextFields);
-    confirmNewPassword.keydown(changeTextFields);
+    confirmNewPassword.keydown(changeTextFields);*/
 
     addOrModifyPassword.click(function () {
-        // textFieldValidation(oldPassword, dbEmpty);
+        alert("begin!");
+        /*textFieldValidation(oldPassword/!*, dbEmpty*!/);
         textFieldValidation(newPassword);
-        textFieldValidation(confirmNewPassword);
+        textFieldValidation(confirmNewPassword);*/
 
-        var oldPasswordHad = false;
+        /*var oldPasswordHad = false;
 
-        var password_storage_id = null;
+        var password_storage_id = null;*/
 
-        if(!dbEmpty){
+        lsPasswordStorage = localStorage.getItem("passwordStorage");
+        if(lsPasswordStorage != null && lsPasswordStorage.trim() != ''){
+            if(oldPassword.val() != lsPasswordStorage){
+                alert("Password not correct!");
+            }
+            if(newPassword.val() != confirmNewPassword.val()){
+                alert("New password and confirm password not equals!");
+            }
+            localStorage.setItem("passwordStorage", newPassword.val());
+            alert("You changed you password " + newPassword.val());
+        }else{
+            alert("ERROR");
+        }
+
+
+        /*if(!dbEmpty){
             db.transaction(function (tx) {//WHERE PASSWORD_STORAGE_ID IS NOT NULL AND CURRENT_PASSWORD = 1
                 tx.executeSql('SELECT * FROM PASSWORD_STORAGE WHERE PASSWORD_STORE = ? AND ACTIVE_PASSWORD', [oldPassword.val()], function (tx, results) {
                     var len = results.rows.length, i;
@@ -170,6 +187,6 @@ $(document).ready(function () {
             successP.fadeOut(5000);
         }else{
             alert("Incorrect password!" + oldPasswordHad + " - " + newPassword.val() + " " + confirmNewPassword.val());
-        }
+        }*/
     });
 });

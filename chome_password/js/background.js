@@ -1,26 +1,41 @@
 chrome.windows.onCreated.addListener(function (window) {
-    if (!localStorage.getItem("setPassword")) {
-        var res = null;
+    lsSetPassword = localStorage.getItem("setPassword");
+    lsPasswordStorage = localStorage.getItem("passwordStorage");
 
-        if (!dbEmpty) {
-            var correctPassword = false;
-            do {
-                alert("Not correct password - " + res);
-                res = prompt("Message");
-                db.transaction(function (tx) {//WHERE PASSWORD_STORAGE_ID IS NOT NULL AND CURRENT_PASSWORD = 1
-                    tx.executeSql('SELECT * FROM PASSWORD_STORAGE WHERE PASSWORD_STORE = ? AND ACTIVE_PASSWORD = ?', [res, 1], function (tx, results) {
-                        var len = results.rows.length, i;
-                        for (i = 0; i < len; i++) {
-                            if (results.rows.item(i).PASSWORD_STORAGE_ID && results.rows.item(i).PASSWORD_STORE) {
-                                correctPassword = true;
-                            }
-                        }
+    /*$(document).ready(function () {
+        $( "#dialog" ).dialog();
+    });*/
 
-                    }, null);
-                });
-            } while (!correctPassword);
-            localStorage.setItem("setPassword", correctPassword);
+
+    if (!lsPasswordStorage) {
+        var count = 0;
+        var password = null;
+        do {
+            var message = null;
+            if (count > 0) {
+                message = "You input not valid password, please try again, your attempt - " + count;
+            } else {
+                message = "You need set Password"
+            }
+            password = prompt(message);
+            count++;
         }
+        while (password == null || password.trim() == '');
+        localStorage.setItem("passwordStorage", password);
+    }
+
+    count = 0;
+    if (lsSetPassword == null || lsSetPassword.trim() == '') {
+        var res = null;
+        var correctPassword = false;
+        do {
+            res = prompt(count == 0 ? "Please input your password" : "You input not correct password, please try again");
+            if (res == localStorage.getItem("passwordStorage")) {
+                correctPassword = true;
+            }
+            count++;
+        } while (!correctPassword);
+        localStorage.setItem("setPassword", correctPassword);
     }
 });
 
